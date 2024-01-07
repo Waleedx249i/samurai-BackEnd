@@ -1,5 +1,5 @@
 <p align="center">Samurai Taxi Backend API</p>
-<p align="center"> <img src="https://your-logo-url" alt="Samurai Taxi Logo"> </p> <p align="center">This repository contains the backend API for the Samurai Taxi app, providing a seamless experience for both users and drivers.</p>
+<p align="center"> <img src="logo.png" alt="Samurai Taxi Logo"> </p> <p align="center">This repository contains the backend API for the Samurai Taxi app, providing a seamless experience for both users and drivers.</p>
 Prerequisites
 Before you begin, ensure that you have the following requirements:
 
