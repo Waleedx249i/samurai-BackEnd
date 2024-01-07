@@ -1,6 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\api\v1\auth\LoginController;
+use App\Http\Controllers\api\v1\DriverController;
+use App\Http\Controllers\api\v1\TripController;
+use App\Http\Controllers\api\v1\UserController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +18,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/login', [LoginController::class, 'submit']);
+Route::post('/login/verify', [LoginController::class, 'verify']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', [UserController::class, 'show']);
+    Route::get('/driver', [DriverController::class, 'show']);
+    Route::post('/driver', [DriverController::class, 'update']);
+    Route::post('/trip', [TripController::class, 'store']);
+    Route::get('/trip/{trip}', [TripController::class, 'show']);
+    Route::post('/trip/{trip}/accept', [TripController::class, 'accept']);
+    Route::post('/trip/{trip}/start', [TripController::class, 'start']);
+    Route::post('/trip/{trip}/end', [TripController::class, 'end']);
+    Route::post('/trip/{trip}/location', [TripController::class, 'location']);
 });
