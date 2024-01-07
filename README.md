@@ -1,66 +1,97 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Samurai Taxi Backend API
+This repository contains the backend API for the Samurai Taxi app. It is built using Laravel 10, MySQL, Twilio for SMS verification, Sanctum for API token authentication, and Pusher for broadcasting.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Prerequisites
+PHP 7.4 or higher
+Composer (https://getcomposer.org/)
+MySQL or any other compatible database management system
+Twilio account for SMS verification (https://www.twilio.com/)
+Twilio PHP SDK (https://github.com/twilio/twilio-php)
+Laravel Sanctum for API token authentication (https://laravel.com/docs/8.x/sanctum)
+Pusher account for real-time broadcasting (https://pusher.com/)
+Pusher PHP SDK (https://github.com/pusher/pusher-http-php)
+Installation
+Clone the repository:
 
-## About Laravel
+bash
+Copy
+git clone https://github.com/your-repo-url.git
+```
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Navigate to the project directory:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+bash
+Copy
+cd samurai-backend
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Install dependencies:
 
-## Learning Laravel
+bash
+Copy
+composer install
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Create a .env file by copying the .env.example file and update the necessary configuration values:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+bash
+Copy
+cp .env.example .env
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Update the `DB_*` variables with your MySQL database credentials.
 
-## Laravel Sponsors
+Generate an application key:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+bash
+Copy
+php artisan key:generate
+```
 
-### Premium Partners
+Run database migrations:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+bash
+Copy
+php artisan migrate
+```
 
-## Contributing
+Install and configure Laravel Sanctum:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Install Sanctum:
 
-## Code of Conduct
+bash
+Copy
+composer require laravel/sanctum
+Publish the Sanctum configuration:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+bash
+Copy
+php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+Generate a Sanctum API token encryption key:
 
-## Security Vulnerabilities
+bash
+Copy
+php artisan sanctum:install
+Configure Twilio for SMS verification:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Sign up for a Twilio account if you don't have one already (https://www.twilio.com/).
+Obtain your Twilio account SID and auth token.
+Update the TWILIO_SID and TWILIO_AUTH_TOKEN variables in the .env file with your Twilio credentials.
+Configure Pusher for broadcasting:
 
-## License
+Sign up for a Pusher account if you don't have one already (https://pusher.com/).
+Create a new Pusher app and obtain the app credentials.
+Update the PUSHER_APP_ID, PUSHER_APP_KEY, and PUSHER_APP_SECRET variables in the .env file with your Pusher app credentials.
+Start the development server:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+bash
+Copy
+php artisan serve
+Usage
+The Samurai Taxi backend API provides endpoints for various functionalities of the app, including user registration, login, profile management, trip requests, starting and ending trips, and more.
+The API also utilizes Pusher for real-time broadcasting of trip status updates. The broadcasting functionality is integrated into the relevant trip endpoints, allowing clients to receive real-time updates about trip statuses.
+
+Please refer to the code documentation and API routes for a complete list of available endpoints and their usage.
+
+Contributing
+Contributions to the Samurai Taxi backend API are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
